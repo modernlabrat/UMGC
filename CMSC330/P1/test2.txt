@@ -1,0 +1,13 @@
+Window "Phone" (500, 300) Layout Flow:
+ Textfield 20;
+ Panel Layout Flow:
+ Button "Button";
+ Panel Layout Grid(2, 1):
+ Textfield 30;
+ Button "Nested Panel Button";
+ End;
+ Textfield 20;
+ Label "A Label";
+ Button "0";
+ End;
+End.
