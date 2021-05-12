@@ -1,8 +1,6 @@
-# Proper Syntax 
-
-1. For loading objects via .txt file
-2. Objects must be enclosed in [ ]: brackets.
-3. Colon represents end of line, note the last field does not include 2 colons, but 1 after the closing "]" bracket.
+# Proper Syntax for loading objects via text file
+1. Objects must be enclosed in [ ]: brackets.
+2. Colon represents end of line, note the last field does not include 2 colons, but 1 after the closing "]" bracket.
 
 ## 1. Data Types
 
