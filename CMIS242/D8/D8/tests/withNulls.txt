@@ -1,0 +1,5 @@
+Name,Breed,Age:
+Rex,null,2
+Max,German Shepard,3
+Simba, Poodle, null
+null,Beagle,6
