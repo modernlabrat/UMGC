@@ -1,55 +1,62 @@
 # Proper Syntax 
+
 1. For loading objects via .txt file
 2. Objects must be enclosed in [ ]: brackets.
 3. Colon represents end of line, note the last field does not include 2 colons, but 1 after the closing "]" bracket.
 
 ## 1. Data Types
-> EBook|MovieDVD|MusicCD = String<br />
-> ID = INT (length=6)<br />
-> YEAR = INT (length=4)<br />
-> COPIES = INT<br />
-> PRICE = DOUBLE:<br />
-> STATUS = A|R|O<br />
+
+> EBook|MovieDVD|MusicCD = String  
+> ID = INT (length=6)  
+> YEAR = INT (length=4)  
+> COPIES = INT  
+> PRICE = DOUBLE  
+> STATUS = A|R|O  
 > * A = Available
 > * R = Rented
-> * O = Out of Stock <br />
-> TITLE= STRING<br />
-> NUMCHAPTERS= INT<br />
-> HASCHAPTERS= BOOLEAN<br />
-> WORDCOUNT= INT<br />
-> GENRE = STRING <br />
-> ARTIST = STRING <br />
-> LENGTH = STRING (pattern=MM:ss)<br />
+> * O = Out of Stock
+>
+>
+> TITLE= STRING  
+> NUMCHAPTERS= INT  
+> HASCHAPTERS= BOOLEAN  
+> WORDCOUNT= INT  
+> GENRE = STRING  
+> ARTIST = STRING  
+> LENGTH = STRING (pattern=MM:ss)
 
-## 2. EBOOK
-> [ EBook:<br />
-> ID=id:<br />
-> YEAR=year:<br />
-> COPIES=copies:<br />
-> PRICE=price:<br />
-> STATUS=A|R|O:<br />
-> TITLE=title:<br />
-> NUMCHAPTERS=number of chapters:<br />
-> HASCHAPTERS=true|false: <br />
-> WORDCOUNT=word count ]:<br />
+## 2. EBOOK Syntax
 
-## 3. MovieDVD
-> [ MovieDVD:<br />
-> ID=id:<br />
-> YEAR=year:<br />
-> COPIES=copies:<br />
-> PRICE=price:<br />
-> STATUS=A|R|O:<br />
-> TITLE=title:<br />
-> GENRE=genre ]:<br />
+> [ EBook:  
+> ID=id:  
+> YEAR=year:  
+> COPIES=copies:  
+> PRICE=price:  
+> STATUS=A|R|O:  
+> TITLE=title:  
+> NUMCHAPTERS=number of chapters:  
+> HASCHAPTERS=true|false:  
+> WORDCOUNT=word count ]:
 
-## 4. MusicCD
-> [ MusicCD:<br />
-> ID=id:<br />
-> YEAR=year:<br />
-> COPIES=copies:<br />
-> PRICE=price:<br />
-> STATUS=A|R|O:<br />
-> TITLE=title:<br />
-> ARTIST=artist:<br />
-> LENGTH=length ]:<br />
+## 3. MovieDVD Syntax
+
+> [ MovieDVD:  
+> ID=id:  
+> YEAR=year:  
+> COPIES=copies:  
+> PRICE=price:  
+> STATUS=A|R|O:  
+> TITLE=title:  
+> GENRE=genre ]:  
+
+## 4. MusicCD Syntax
+
+> [ MusicCD:  
+> ID=id:  
+> YEAR=year:  
+> COPIES=copies:  
+> PRICE=price:  
+> STATUS=A|R|O:  
+> TITLE=title:  
+> ARTIST=artist:  
+> LENGTH=length ]:  
