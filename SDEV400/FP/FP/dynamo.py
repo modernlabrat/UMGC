@@ -2,6 +2,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 def tables_created(dynamodb):
+    # method that creates Users and Products table
     try:
         products_table = dynamodb.describe_table(TableName="Products")
 
@@ -83,6 +84,7 @@ def tables_created(dynamodb):
 
 
 def is_finished(dynamodb):
+    # method that checks if tables are created
     try:
         products_table = dynamodb.describe_table(TableName="Products")
         users_table = dynamodb.describe_table(TableName="Users")
@@ -94,6 +96,7 @@ def is_finished(dynamodb):
 
 
 def has_products(dynamodb):
+    # method that checks if Products table has products
     try:
         response = dynamodb.get_item(TableName="Products", Key={
             'Catalog': {'S': "Shirts"}, 'Name': {'S': "LA Graphic Tee"}})
@@ -106,30 +109,80 @@ def has_products(dynamodb):
 
 
 def fill_products(dynamodb):
-    response = dynamodb.batch_write_item(
-        RequestItems={
-            'Products': [
-                {
-                    'PutRequest': {
-                        'Item': {
-                            'Catalog': {'S': 'Shirts'},
-                            'Name': {'S': 'LA Graphic Tee'},
-                            'Price': {'S': '$10.00'}
+    # method that fills table
+    try:
+        response = dynamodb.batch_write_item(
+            RequestItems={
+                'Products': [
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Shirts'},
+                                'Name': {'S': 'LA Graphic Tee'},
+                                'Price': {'S': '$10.00'}
+                            }
+                        }
+                    },
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Shirts'},
+                                'Name': {'S': 'Pink Short Sleeve'},
+                                'Price': {'S': '$3.99'}
+                            }
+                        }
+                    },
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Pants'},
+                                'Name': {'S': 'Khakis'},
+                                'Price': {'S': '$54.95'}
+                            }
+                        }
+                    },
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Pants'},
+                                'Name': {'S': 'Distressed Black Jeans'},
+                                'Price': {'S': '$21.95'}
+                            }
+                        }
+                    },
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Shoes'},
+                                'Name': {'S': 'Nike Revolution 5'},
+                                'Price': {'S': '$49.97'}
+                            }
+                        }
+                    },
+                    {
+                        'PutRequest': {
+                            'Item': {
+                                'Catalog': {'S': 'Shoes'},
+                                'Name': {'S': 'Black Classic Crocs'},
+                                'Price': {'S': '$49.99'}
+                            }
                         }
                     }
-                }
-            ]
-        }
-    )
+                ]
+            }
+        )
+    except dynamodb.exceptions.ResourceNotFoundException:
+        print("filling data")
 
 
 def run(dynamodb):
+    # method that creates and fill appropriate tables
     if tables_created(dynamodb):
         if is_finished(dynamodb):
             if not has_products(dynamodb):
                 fill_products(dynamodb)
                 run(dynamodb)
-            else:
-                return True
-
-    return False
+        else:
+            run(dynamodb)
+    else:
+        run(dynamodb)
