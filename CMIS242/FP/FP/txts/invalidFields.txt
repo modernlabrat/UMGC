@@ -1,0 +1,9 @@
+[ MusicCD:
+ID=943243:
+YEAR=2018:
+COPIES=6:
+PRICE=12.99:
+STATUS=A:
+NAME=Hollywood's Bleeding:
+ARTIST=Post Malone:
+LENGTH=30:20 ]:

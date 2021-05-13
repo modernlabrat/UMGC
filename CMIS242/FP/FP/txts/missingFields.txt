@@ -1,0 +1,7 @@
+[ MusicCD:
+ID=943234:
+YEAR=2018:
+COPIES=6:
+NAME=Hollywood's Bleeding:
+ARTIST=Post Malone:
+LENGTH=30:20 ]:

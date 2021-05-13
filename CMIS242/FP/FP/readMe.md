@@ -1,6 +1,9 @@
 # Proper Syntax for loading objects via text file
 1. Objects must be enclosed in [ ]: brackets.
 2. Colon represents end of line, note the last field does not include 2 colons, but 1 after the closing "]" bracket.
+3. All IDs must be unique
+4. See test1.txt in /txts folder for load demo with correct syntax
+5. Spaces are allowed between Media declarations (after ']:')
 
 ## 1. Data Types
 
@@ -11,7 +14,6 @@
 > PRICE = DOUBLE  
 > STATUS = A|R|O  
 > * A = Available
-> * R = Rented
 > * O = Out of Stock
 >
 >
@@ -30,7 +32,7 @@
 > YEAR=year:  
 > COPIES=copies:  
 > PRICE=price:  
-> STATUS=A|R|O:  
+> STATUS=A|O:  
 > TITLE=title:  
 > NUMCHAPTERS=number of chapters:  
 > HASCHAPTERS=true|false:  
@@ -43,7 +45,7 @@
 > YEAR=year:  
 > COPIES=copies:  
 > PRICE=price:  
-> STATUS=A|R|O:  
+> STATUS=A|O:  
 > TITLE=title:  
 > GENRE=genre ]:  
 
@@ -54,7 +56,7 @@
 > YEAR=year:  
 > COPIES=copies:  
 > PRICE=price:  
-> STATUS=A|R|O:  
+> STATUS=A|O:  
 > TITLE=title:  
 > ARTIST=artist:  
 > LENGTH=length ]:  

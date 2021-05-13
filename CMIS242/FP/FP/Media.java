@@ -3,6 +3,7 @@ public class Media {
     private String title;
     private Status status;
     private double price;
+    private String type;
 
     public Media(int id, String title, int year, double price, Status status, int copies) {
         this.id = id;
@@ -11,6 +12,7 @@ public class Media {
         this.price = price;
         this.status = status;
         this.copies = copies;
+        this.type = "Media";
     }
 
     public int getId() {
@@ -41,6 +43,10 @@ public class Media {
         return copies;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -63,6 +69,10 @@ public class Media {
 
     public void setCopies(int copies) {
         this.copies = copies;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double calculateRentalFee() {

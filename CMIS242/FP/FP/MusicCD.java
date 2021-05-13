@@ -6,6 +6,7 @@ public class MusicCD extends Media {
         super(id, title, year, price, status, copies);
         this.artist = artist;
         this.length = length;
+        this.setType("MusicCD");
     }
 
     public String getArtist() {

@@ -1,0 +1,28 @@
+[ MovieDVD:
+ID=940432:
+YEAR=2018:
+COPIES=3:
+PRICE=10.99:
+STATUS=A:
+TITLE=Where the Wild Things Are:
+GENRE=Adventure ]:
+
+[ EBook:
+ID=539424:
+YEAR=2015:
+COPIES=4:
+PRICE=43.99:
+STATUS=A:
+TITLE=50 Shades of Grey - Part 1:
+NUMCHAPTERS=50:
+HASCHAPTERS=true:
+WORDCOUNT=9302 ]:
+
+[ MovieDVD:
+ID=585354:
+YEAR=2016:
+COPIES=3:
+PRICE=8.99:
+STATUS=A:
+TITLE=50 Shades of Grey - Part 1:
+GENRE=Drama ]:

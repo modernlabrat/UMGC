@@ -4,6 +4,7 @@ public class MovieDVD extends Media {
     public MovieDVD(int id, String title, int year, double price, String genre, Status status, int copies) {
         super(id, title, year, price, status, copies);
         this.genre = genre;
+        this.setType("MovieDVD");
     }
 
     public String getGenre() {

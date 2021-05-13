@@ -1,0 +1,29 @@
+[ EBook:
+ID=321424:
+YEAR=2017:
+COPIES=5:
+PRICE=14.99:
+STATUS=A:
+TITLE=Where the Wild Things Are:
+NUMCHAPTERS=10:
+HASCHAPTERS=true:
+WORDCOUNT=1302 ]:
+
+[ MusicCD:
+ID=543745:
+YEAR=2018:
+COPIES=6:
+PRICE=12.99:
+STATUS=A:
+TITLE=Hollywood's Bleeding:
+ARTIST=Post Malone:
+LENGTH=30:20 ]:
+
+[ MovieDVD:
+ID=345797:
+YEAR=2019:
+COPIES=60:
+PRICE=5.99:
+STATUS=A:
+TITLE=Parasite:
+GENRE=Thriller ]:
