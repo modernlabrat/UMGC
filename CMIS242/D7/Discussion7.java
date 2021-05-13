@@ -24,6 +24,7 @@ public class Discussion7 {
         if (preTokens.length == 6) {
             for (String preToken: preTokens) {
                 try {
+                    preToken = preToken.trim();
                     int token = Integer.parseInt(preToken);
                     tokens.add(token);
                 } catch (NumberFormatException nfe) {
