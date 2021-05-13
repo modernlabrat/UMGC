@@ -1,3 +1,8 @@
+/*
+ * Author: Kyra Samuel
+ * File: Media.java
+ */
+
 public class Media {
     private int id, quantity, year, copies;
     private String title;

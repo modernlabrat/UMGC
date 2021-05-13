@@ -1,3 +1,8 @@
+/*
+ * Author: Kyra Samuel
+ * File: MediaRentalSystem.java
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

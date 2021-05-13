@@ -1,3 +1,7 @@
+/*
+ * Author: Kyra Samuel
+ * File: Manager.java
+ */
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 

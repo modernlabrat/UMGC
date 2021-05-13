@@ -1,3 +1,7 @@
+/*
+ * Author: Kyra Samuel
+ * File: MovieDVD.java
+ */
 public class MovieDVD extends Media {
     private String genre;
 

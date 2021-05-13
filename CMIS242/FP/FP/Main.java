@@ -1,3 +1,8 @@
+/*
+ * Author: Kyra Samuel
+ * File: Main.java
+ * Description: Creates a new MediaRentalSystem object
+ */
 import java.io.IOException;
 public class Main {
     public static void main(String[] args) {

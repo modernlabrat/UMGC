@@ -1,8 +1,13 @@
+/*
+ * Author: Kyra Samuel
+ * File: Parser.java
+ * Description: A parser that gets a file and parses abd creates Media objects according the Media declaration in the .txt file, see readMe.md for syntax details
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import javax.swing.JFileChooser;

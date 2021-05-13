@@ -1,3 +1,7 @@
+/*
+ * Author: Kyra Samuel
+ * File: EBook.java
+ */
 public class EBook extends Media {
     private int numChapters, wordCount;
     private boolean hasChapters;

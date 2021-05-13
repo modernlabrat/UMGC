@@ -1,3 +1,8 @@
+/*
+ * Author: Kyra Samuel
+ * File: MusicCD.java
+ */
+
 public class MusicCD extends Media {
     private String artist;
     private String length;
