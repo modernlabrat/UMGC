@@ -16,7 +16,7 @@ def check_continue():
         valid response.
 
         Args:
-            response: The input response, set to "" by default. If invalid,
+            response (String): The input response, set to "" by default. If invalid,
               it is set to new response.
     """
 
@@ -24,7 +24,7 @@ def check_continue():
         "Do you want to continue with Voter Registration? Y/N: ").strip()
 
     response = response.upper()
-
+    exit_lab(response)
     if response in ['Y', 'N']:
         if response == "N":
             print("Thank you for participating! Goodbye.")
@@ -33,20 +33,31 @@ def check_continue():
         print("Please enter Y/N.")
         check_continue()
 
+def exit_lab(response):
+    """Exits Lab
+
+    Args:
+        response (String): response given by User
+    """
+    if response == "<":
+        print("Thank you for participating! Goodbye.")
+        sys.exit(0)
 
 def get_name(first=True):
     """ Validates if the User's first or last name is letters only.
 
         Args:
-            first: Set to True by default to prompt
+            first (Boolean): Set to True by default to prompt
             for the first name of the user. If false,
             it is prompting for the last name.
     """
 
     if first:
         name = input("What is your first name: ").strip()
+        exit_lab(name)
     else:
         name = input("What is your last name: ").strip()
+        exit_lab(name)
 
     if not name.isalpha():
         print("Only letters are accepted. ")
@@ -59,8 +70,18 @@ def get_age():
     """ Validates if age is an int value only.
     """
     age = input("What is your age: ").strip()
-    if not age.isdigit() or int(age) > 119:
-        print("Only int values below 119 are accepted. ")
+    if not age.isdigit():
+        print("Only int values are accepted. ")
+        return get_age()
+
+    if int(age) < 18:
+        years = 18 - int(age)
+        print("Sorry champ. You have to be 18 years or older to vote in the US.")
+        print("Come Back in", str(years) + " years!")
+        sys.exit(0)
+
+    if int(age) > 119:
+        print("Please enter a valid age below 120.")
         return get_age()
 
     return age
@@ -72,6 +93,8 @@ def check_citizenship():
         If user is not a U.S Citizen, the system is closed.
     """
     citizenship = input("Are you a U.S Citizen (Y/N): ").strip().upper()
+    exit_lab(citizenship)
+
     if citizenship in ['Y', 'N']:
         if citizenship == "N":
             print("Sorry! Only U.S Citizens are allowed to vote in the U.S.")
@@ -92,6 +115,8 @@ def get_state():
               "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
     state = input("What state do you live in?: ").upper().strip()
+    exit_lab(state)
+
     if state not in states:
         print("Please enter a valid US State Abbreviation.")
         return get_state()
@@ -110,10 +135,11 @@ def get_zip_code(state):
         code.
 
         Args:
-            state: The state provided by the User
+            state (String): The state provided by the User
     """
     found = False
     zip_code = input("What is your zipcode?: ").upper().strip()
+    exit_lab(zip_code)
 
     state_zip_codes = zipcodes.filter_by(state=state)
 
@@ -136,6 +162,7 @@ def run():
     """ Runs the Python Voter Registration Application.
     """
     print("Welcome to the Python Voter Registration Application.")
+    print("Enter '<' to restart at anytime.")
     check_continue()
 
     voter = {}
