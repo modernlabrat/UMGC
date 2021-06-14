@@ -101,8 +101,8 @@ def calculate_volume():
     """ Calculates the volume of a right circular cylinder.
     """
 
-    radius = check_double(input("Enter radius: ").strip())
-    height = check_double(input("Enter height: ").strip())
+    radius = check_double(input("Enter radius: ").strip(), use="volume")
+    height = check_double(input("Enter height: ").strip(), use="volume")
 
     volume = math.pi * pow(radius, 2) * height
 
@@ -138,6 +138,13 @@ def check_double(number, use=""):
 
             if denominator != 0:
                 return denominator
+
+        if use == "volume":
+            value = float(number)
+
+            if value > 0:
+                return value
+
     except ValueError:
         pass
 
