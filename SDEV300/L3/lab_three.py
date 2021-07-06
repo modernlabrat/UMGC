@@ -48,13 +48,13 @@ def display_bar():
     ax.bar(top_five_states, top_five_populations)
 
     ax.legend(labels=['Population'])
-    
+
     plt.show()
 
 def exit_program():
     """ Exits the Program
     """
-    print("Thank you for participating! Goodbye.")
+    print("Thank you foparticipating! Goodbye.")
     sys.exit()
 
 
