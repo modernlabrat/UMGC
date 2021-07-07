@@ -1,0 +1,79 @@
+.planets {
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    width: 85vw;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 5rem;
+    background-color: rgb(248, 253, 255);
+}
+
+.home-title {
+    text-align: center;
+}
+
+.solar-system-image-and-caption {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid blueviolet;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.solar-system-image {
+    max-width: 70vw;
+    max-height: 60vh;
+}
+
+.solar-system-caption {
+    padding: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 15rem;
+    background-color: whitesmoke;
+    margin-top: 15px;
+    border-radius: 5px;
+    max-width: 70vw;
+    color: rgb(236, 8, 133);
+    border: 1px solid rgb(236, 8, 133);
+}
+
+.solar-system-caption.second-cap {
+    color: rgb(71, 10, 71);
+    border-color: rgb(71, 10, 71);
+}
+
+.solar-system-caption.third-cap {
+    color: rgb(25, 44, 218);
+    border-color: rgb(25, 44, 218);
+}
+
+.solar-system-caption::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa;
+}
+
+.solar-system-caption::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+
+.solar-system-image-and-caption {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.astronomy-facts {
+    border: 1px solid blueviolet;
+    border-radius: 5px;
+    color: rgb(37, 19, 37);
+}
+
+.facts-title {
+    text-align: center;
+}

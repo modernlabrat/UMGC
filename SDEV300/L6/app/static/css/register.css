@@ -1,0 +1,32 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.register-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+}
+.register-btn {
+    height: 2.3rem;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 5.3rem;
+    font-size: 15px;
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(237, 233, 255);
+    color: darkblue;
+    text-decoration: none;
+}
+
+.register-btn:hover,
+.register-btn:focus {
+    filter: drop-shadow(0 0 1px blue);
+}

@@ -1,0 +1,50 @@
+.shop-title {
+    margin-top: 6rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.shop-grid {
+    border: 1px solid black;
+    width: 85vw;
+    height: auto;
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.shop-item {
+    height: 20rem;
+    width: 15rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
+}
+
+.shop-button {
+    height: 1.3rem;
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 3.2rem;
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(237, 233, 255);
+    color: darkblue;
+    text-decoration: none;
+}
+
+.shop-button:hover, .shop-button:focus {
+    filter: drop-shadow(0 0 1px blue);
+}
+
+.shop-img {
+    max-height: 10rem;
+    max-width: 10rem;
+}
