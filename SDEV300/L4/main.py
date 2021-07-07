@@ -1,5 +1,8 @@
-import lab_four as lab
+"""Main Driver
+"""
+
 import sys
+import lab_four as lab
 
 if __name__ == "__main__":
     try:

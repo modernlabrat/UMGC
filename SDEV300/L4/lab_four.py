@@ -207,3 +207,6 @@ def matrix_menu(first_matrix, second_matrix):
         matrix_operations(option=options[response],
           first_matrix=first_matrix,
           second_matrix=second_matrix)
+    else:
+        print("Please select a valid menu option")
+        matrix_menu(first_matrix=first_matrix, second_matrix=second_matrix)
