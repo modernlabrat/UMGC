@@ -1,9 +1,14 @@
+""" Stores the US data and appropriate functions for modifying/printing data
+"""
 from PIL import Image
 
-data = {
+class UsaDataGenerator:
+    """ USA Data Generator Class
+    """
+    usa_data = {
         "Alabama": {
-            "state": "Alabama", "capital": "Montgomery", "population": 4887680, 
-            "flowers": ["Camellia", "Oak-Leaf Hydrangea"], 
+            "state": "Alabama", "capital": "Montgomery", "population": 4887680,
+            "flowers": ["Camellia", "Oak-Leaf Hydrangea"],
             "images": ["camellia-flower.jpg", "oak-leaf-hydrangea.jpg"]
         },
         "Alaska": {
@@ -53,8 +58,10 @@ data = {
         },
         "Hawaii": {
             "state": "Hawaii", "capital": "Honolulu", "population": 1420590,
-            "flowers": ["Yellow Pua Aloalo", "'Ohi'a Lehua", "Lokelani", "Pua 'Ilima", "Hinahina", "Pua Kukui"],
-            "images": ["yellowpuaaloalo.jpg", "ohialehua.jpg", "lokelani.jpg", "puailima.jpg", "hinahina.jpg", "puakukui.jpg"]
+            "flowers": ["Yellow Pua Aloalo", "'Ohi'a Lehua", "Lokelani",
+                        "Pua 'Ilima", "Hinahina", "Pua Kukui"],
+            "images": ["yellowpuaaloalo.jpg", "ohialehua.jpg", "lokelani.jpg",
+                       "puailima.jpg", "hinahina.jpg", "puakukui.jpg"]
         },
         "Idaho": {
             "state": "Idaho", "capital": "Boise", "population": 1750540,
@@ -70,7 +77,7 @@ data = {
             "state": "Indiana", "capital": "Indianapolis", "population": 6695500,
             "flowers": ["Peony"],
             "images": ["peony.jpg"]
-        },        
+        },
         "Iowa": {
             "state": "Iowa", "capital": "Des Moines", "population": 3148620,
             "flowers": ["Wild Rose"],
@@ -253,68 +260,70 @@ data = {
         }
     }
 
+    @classmethod
+    def get_data(cls):
+        """ getter method for usa_data attribute
 
-def get_data():
-    global data
+        Returns:
+            dict: usa_data dictionary
+        """
 
-    return data
+        return cls.usa_data
 
-def update_state(state, field, value):
-    """ Updates a State
+    @classmethod
+    def update_state(cls, state, field, value):
+        """ Updates a State
 
-    Args:
-        state (string): state to update
-        field (string): field to update
-        value (string): value of the field
-    """
-    global data
+        Args:
+            state (string): state to update
+            field (string): field to update
+            value (string): value of the field
+        """
+        cls.usa_data[state][field] = value
 
-    data[state][field] = value
+    @classmethod
+    def print_data(cls):
+        """ Prints all of the data in the data dictionary
+        """
 
-def print_data():
-    """ Prints all of the data in the data dictionary
-    """
-    global data
+        for key, value in cls.usa_data.items():
+            print("\n" + key + ":\n\tCapital:", value["capital"], end="\n\t")
+            print("Population:", value["population"], end="\n\t")
+            print("Flowers: ", end=" ")
+            for i, item in enumerate(value["flowers"]):
+                if i:
+                    print(',', end=" ")
+                print(item, end="")
 
-    for key, value in data.items():
-        print("\n" + key + ":\n\tCapital:", value["capital"], end="\n\t")
-        print("Population:", value["population"], end="\n\t")
+    @classmethod
+    def print_state(cls, current_state):
+        """ Prints the state's capital, state, population, and flowers.
+
+        Args:
+            current_state (string): The state given by the user.
+        """
+
+        state = cls.usa_data[current_state]
+
+        print("\n" + state["state"] + ":\n\tCapital:", state["capital"], end="\n\t")
+        print("Population:", state["population"], end="\n\t")
         print("Flowers: ", end=" ")
-        for i, item in enumerate(value["flowers"]):
+
+        for i, item in enumerate(state["flowers"]):
             if i:
                 print(',', end=" ")
             print(item, end="")
 
-def print_state(current_state):
-    """ Prints the state's capital, state, population, and flowers.
+    @classmethod
+    def show_state_flowers(cls, selected_state):
+        """ Displays a picture of the flowers in the user's browser
 
-    Args:
-        current_state (string): The state given by the user.
-    """
-    global data
+        Args:
+            state (string): A valid US state
+        """
 
-    state = data[current_state]
-
-    print("\n" + state["state"] + ":\n\tCapital:", state["capital"], end="\n\t")
-    print("Population:", state["population"], end="\n\t")
-    print("Flowers: ", end=" ")
-
-    for i, item in enumerate(state["flowers"]):
-        if i:
-            print(',', end=" ")
-        print(item, end="")
-
-def show_state_flowers(selected_state):
-    """ Displays a picture of the flowers in the user's browser
-
-    Args:
-        state (string): A valid US state 
-    """
-    global data
-    print("\n\nDisplaying flower(s)...\n")
-    for flower in data[selected_state]["images"]:
-        path = "./flowers/" + flower
-        img = Image.open(path)
-        img.show()
-
-
+        print("\n\nDisplaying flower(s)...\n")
+        for flower in cls.usa_data[selected_state]["images"]:
+            path = "./flowers/" + flower
+            img = Image.open(path)
+            img.show()
