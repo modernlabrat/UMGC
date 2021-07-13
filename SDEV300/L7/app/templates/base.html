@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>SDEV300</title>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                    <div class="message_flash">{{ message }}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+        <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/shop.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/forms.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/shop">Shop</a>
+            {% if current_user.is_anonymous %}
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

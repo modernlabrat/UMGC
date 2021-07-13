@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="login">
+    <form class="login-form" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h1>Welcome Back</h1>
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(size=32) }}
+
+            {% for error in form.username.errors %}
+            <span class="errors">{{ error }}</span>
+            {% endfor %}    
+            <br>
+            {{ form.password.label }}
+            {{ form.password(size=32) }}
+
+            {% for error in form.password.errors %}
+            <span class="errors">{{ error }}</span>
+            {% endfor %}
+
+            <div style="font-size: 11px; margin-top: 5px">Need an Account? 
+                <a href="{{ url_for('register') }}">Register</a>
+            </div>
+
+            <span class="remember-me">
+                {{ form.remember_me() }} {{ form.remember_me.label }}
+            </span>
+        </div>
+        <div class="login-footer">
+            {{ form.submit() }}
+        </div>
+    </form>
+</section>
+{% endblock %}
