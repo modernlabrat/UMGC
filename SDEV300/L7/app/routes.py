@@ -1,8 +1,11 @@
 from flask import url_for, render_template, flash, redirect, request
-from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app import app, db, logger
+from app.forms import LoginForm, RegistrationForm, ResetForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
+from datetime import datetime as dt
+import socket
+
 
 @app.route('/')
 @app.route('/index')
@@ -46,6 +49,20 @@ def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('profile.html', user=user)
 
+@app.route('/profile/<username>/reset', methods=['GET', 'POST'])
+@login_required
+def reset(username):
+    user = User.query.filter_by(username=username).first_or_404()
+
+    form = ResetForm()
+
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash("Password has been successfully reset. Please login")
+        return redirect(url_for('logout'))
+
+    return render_template('reset_password.html', user=user, form=form)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -58,6 +75,15 @@ def login():
 
         if user is None or not user.verify_password(form.password.data):
             flash("Username or Password is incorrect.")
+
+            hostname = socket.gethostname()
+            local_ip = socket.gethostbyname(hostname)
+            
+            date_time = "Date and Time: " + dt.now().strftime("%d/%m/%Y %H:%M")
+            log = date_time + " IP Address: " + local_ip
+
+            logger.append_log(log)
+
             return redirect(url_for('login'))
         
         login_user(user, remember=form.remember_me.data)

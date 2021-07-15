@@ -4,5 +4,6 @@
     <section class="profile-section">
         <img class="profile-img" src="/static/images/account.png">
         <h3 class="username"> @{{ user.username }}</h3>
+        <a class="change-password" href="{{ url_for('reset', username=user.username) }}">Change Password</a>
     </section>
 {% endblock %}

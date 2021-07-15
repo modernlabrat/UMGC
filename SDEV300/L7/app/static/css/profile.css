@@ -5,10 +5,29 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .profile-img {
-    width: 20vw;
+    width: 125px;
     height: auto;
     filter: drop-shadow(0 0 2px blueviolet)
+}
+
+.change-password {
+    text-decoration: none;
+    padding: 3px;
+    width: 10rem;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid blue;
+    border-radius: 5px;
+    color: blue;
+    margin-top: 50px;
+}
+
+.change-password:hover, .change-password:focus {
+    box-shadow: 0 0 2px blueviolet;
+    color: blueviolet;
 }

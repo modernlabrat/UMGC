@@ -1,4 +1,5 @@
-.register, .login{
+.register, .login,
+.reset {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,14 +8,16 @@
     overflow: hidden;
 }
 
-.register-footer, .login-footer {
+.register-footer, .login-footer,
+.reset-footer {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 15px;
 }
 
-.login-footer {
+.login-footer,
+.reset-footer {
     flex-direction: column;
 }
 
@@ -29,4 +32,10 @@
 .errors {
     color: red;
     font-size: 11px;
+}
+
+.reset-footer {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 40px;
 }
