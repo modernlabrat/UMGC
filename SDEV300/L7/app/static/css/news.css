@@ -1,0 +1,56 @@
+.news-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px solid salmon;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 14vh;
+}
+
+.news-articles, .news-article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px
+}
+
+.news-article {
+    border: 1px solid blueviolet;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.article-text {
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.article-date {
+    margin-top: 10px;
+    width: 100%;
+    padding-left: 40px;
+    font-size: 14px;
+    color: hotpink;
+}
+
+.article-img {
+    width: 80vw;
+    height: auto;
+}
+
+.exoplanets-section {
+    border: 1px solid darkblue;
+    padding: 10px;
+}
+
+.columns {
+    color: blue;
+}

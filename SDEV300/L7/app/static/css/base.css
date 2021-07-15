@@ -49,9 +49,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .flashes {
-    border: 1px solid thin;
+    border: 1px solid black;
     border-radius: 5px;
     display: flex;
     text-align: center;
-    height: 80vh;
+    max-height: 10vh;
 }
