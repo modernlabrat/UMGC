@@ -1,0 +1,11 @@
+Window "Colors" (200, 160) Layout Flow:
+Label "Select a Color";
+Panel Layout Grid(2, 2, 2, 2):
+Group
+Radio "Blue";
+Radio "Green";
+Radio "White";
+Radio "Red";
+End;
+End;
+End.

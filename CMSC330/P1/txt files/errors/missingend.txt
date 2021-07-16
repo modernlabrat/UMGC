@@ -1,0 +1,5 @@
+Window "Phone" (170, 220) Layout Flow:
+Group
+Radio "One";
+Radio "Two";
+End.

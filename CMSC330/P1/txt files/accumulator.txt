@@ -1,0 +1,6 @@
+Window "Swing Accumulator" (350, 120) Layout Grid (2, 2, 1, 1):
+Label "Enter an Integer: ";
+Textfield 10;
+Label "The Accumulated Sum is: ";
+Textfield 10;
+End.

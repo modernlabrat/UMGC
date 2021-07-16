@@ -1,7 +1,6 @@
-Window "Incorrect" Grid(20, 20):
+Window "Animals" Grid(20, 20):
 Button "Frog";
 Button "Toad";
 Button "Turtle";
 Button "Snake";
 End.
- There is no Layout Token

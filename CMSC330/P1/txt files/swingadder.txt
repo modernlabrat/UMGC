@@ -1,0 +1,20 @@
+Window "Swing Adder" (250, 170) Layout Grid(1, 1, 3, 3):
+Panel Layout Grid(4, 1, 10, 3):
+Panel Layout Flow:
+Label "First Number";
+Textfield 10;
+End;
+Panel Layout Flow:
+Label "Second Number";
+Textfield 10;
+End;
+Panel Layout Flow:
+Label "Result";
+Textfield 10;
+End;
+Panel Layout Flow:
+Button "Add";
+Button "Clear";
+End;
+End;
+End.

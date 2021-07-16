@@ -1,7 +1,0 @@
-Window "Colors" (300, 300) Layout Grid (2,2,3,3):
-Group 
-Radio "Red"; 
-Radio "Blue";
-Radio "Green";
-End;
-End.

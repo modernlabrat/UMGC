@@ -1,0 +1,6 @@
+Window "Counter" (200, 100) Layout Flow:
+Label "Count";
+Textfield 20
+Button "Up";
+Button "Down";
+End.
