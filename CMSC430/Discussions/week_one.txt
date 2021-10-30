@@ -1,0 +1,9 @@
+function collatz a: integer returns integer;
+  b: integer is a % 2;  
+begin
+  if b == 0 then
+    a is (b / 2);
+  else
+    a is (3 * a + 1);
+  endif;
+end;
