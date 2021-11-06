@@ -22,11 +22,13 @@ using namespace std;
 ws		[ \t\r]+
 comment		\-\-.*\n
 line		[\n]
-id		[A-Za-z][A-Za-z0-9]*
+id		([a-zA-Z][a-zA-Z0-9_]*)
 digit		[0-9]
 int		{digit}+
 punc		[\(\),:;]
 %%
+bool (true|false)
+float ([0-9]+\.0*)(?:.e|E)(?:.\+|\-[0-9]+)
 
 {ws}		{ ECHO; }
 {comment}	{ ECHO; nextLine();}
@@ -67,8 +69,8 @@ returns		{ ECHO; return(RETURNS); }
 and		{ ECHO; return(ANDOP); }
 {id}		{ ECHO; return(IDENTIFIER);}
 {int}		{ ECHO; return(INT_LITERAL); }
-{true} { ECHO; return(BOOL_LITERAL); }
-{false} {ECHO; return(BOOL_LITERAL); }
+{float} {ECHP; return(REAL_LITERAL); }
+{bool} { ECHO; return(BOOL_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
 .		{ ECHO; appendError(LEXICAL, yytext); }
 %%
