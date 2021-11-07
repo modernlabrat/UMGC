@@ -1,0 +1,15 @@
+-- Program containing arrow symbol and new reserved words
+
+function main b: integer returns integer;
+    a: real is 3;
+begin
+    if a < 2 then
+        7 7 + 2 * (2 + 4);
+    else
+        case b is
+            when 1 => a * 2;
+            when 2 => a + 5;
+            others => a + 4;
+        endcase;
+    endif;
+end;

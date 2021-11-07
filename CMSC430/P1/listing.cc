@@ -1,5 +1,7 @@
 // Compiler Theory and Design
 // Dr. Duane J. Jarc
+// Modified By : Kyra Samuel
+// Date : 10 /28 / 2021
 
 // This file contains the bodies of the functions that produces the compilation
 // listing
@@ -43,11 +45,11 @@ int lastLine()
 	printf("     \n");
 
 	if (totalErrors == 0)
-		printf("Compiled Successfully");
+		cout << "Compiled Successfully";
 	else {
-		printf("Lexical Errors ", lexicalErrors);
-		printf("Syntax Errors ", syntacticErrors);
-		printf("Semantic Errors ", semanticErrors);
+		printf("Lexical Errors %d\n", lexicalErrors);
+		printf("Syntax Errors %d\n", syntacticErrors);
+		printf("Semantic Errors %d\n", semanticErrors);
 	}
 
 	return totalErrors;
@@ -71,18 +73,19 @@ void appendError(ErrorCategories errorCategory, string message)
 			break;
 		case SYNTAX:
 			syntacticErrors++;
-		}
+			break;
+	}
 
 	totalErrors++;
 }
 
 void displayErrors()
 {
-	while (!errors.empty()) {
+	while(!errors.empty()) {
 		if (errors.front() != "")
-			printf("%s\n", errors.front());
+			printf("%s\n", errors.front().c_str());
 		errors.pop();
 	}
 
-	printf("\n");
+	cout << endl;
 }

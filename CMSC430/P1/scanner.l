@@ -26,24 +26,21 @@ id		([a-zA-Z][a-zA-Z0-9_]*)
 digit		[0-9]
 int		{digit}+
 punc		[\(\),:;]
+real 		{digit}+\.{digit}*([Ee][+-]?{digit}+)?
+operators     [=|/=|>|<=|>=]
 %%
-real {digit}+\.{digit}*([Ee][+-]?{digit}+)?
 
 {ws}		{ ECHO; }
 {comment}	{ ECHO; nextLine();}
 {line}		{ ECHO; nextLine();}
-{rel} { ECHO; }
 "+"		{ ECHO; return(ADDOP); }
 "-" { ECHO; return(ADDOP); }
 "/" { ECHO; return(MULOP); }
 "*"		{ ECHO; return(MULOP); }
-"=" { ECHO; return(RELOP); }
-"/=" { ECHO; return(RELOP); }
-">" { ECHO; return(RELOP); }
-">=" { ECHO; return(RELOP); }
-"<=" { ECHO; return(RELOP); }
 "=>" {ECHO; return(ARROW); }
 "**" {ECHO; return(EXPOP); }
+"true" { ECHO; return(BOOL_LITERAL); }
+"false" { ECHO; return(BOOL_LITERAL); }
 begin		{ ECHO; return(BEGIN_); }
 boolean		{ ECHO; return(BOOLEAN); }
 end		{ ECHO; return(END); }
@@ -69,9 +66,8 @@ and		{ ECHO; return(ANDOP); }
 {id}		{ ECHO; return(IDENTIFIER); }
 {int}		{ ECHO; return(INT_LITERAL); }
 {real} { ECHO; return(REAL_LITERAL); }
-{punc}		{ ECHO; return(yytext[0]); }
-"true" { ECHO; return(BOOL_LITERAL)}
-"false" { ECHO; return(BOOL_LITERAL)}
+{operators} { ECHO; return(RELOP); }
+{punc} { ECHO; return(yytext[0]); }
 .		{ ECHO; appendError(LEXICAL, yytext); }
 %%
 

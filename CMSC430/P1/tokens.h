@@ -4,8 +4,7 @@
 // Date : 10 /28 / 2021
 
 // This file contains the enumerated type definition for tokens
-enum Tokens
-{
+enum Tokens {
 	RELOP = 256,
 	ADDOP,
 	MULOP,
