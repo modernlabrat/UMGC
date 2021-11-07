@@ -1,15 +1,10 @@
--- Program containing arrow symbol and new reserved words
+(* Program with no errors *)
 
-function main b: integer returns integer;
-    a: real is 3;
-begin
-    if a < 2 then
-        7 7 + 2 * (2 + 4);
-    else
-        case b is
-            when 1 => a * 2;
-            when 2 => a + 5;
-            others => a + 4;
-        endcase;
-    endif;
-end;
+function test_1 returns bool;
+    begin
+        if 5 7 + 2 >= 6 and 8 = 5 ** (7 - 4) then
+            true;
+        else
+            false;
+        endif;
+    end;

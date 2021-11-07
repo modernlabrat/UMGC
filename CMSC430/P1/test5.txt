@@ -1,6 +1,10 @@
--- Function with two lexical errors
+// consequtive underscores are not allowed
 
-function test2 returns integer;
+function _test__1 returns bool;
     begin
-        5 7 $ 2 ^ (2 + 4);
+        if 5 7 + 2 >= 6 and 8 = 5 ** (7 - 4) then
+            true;
+        else
+            false;
+        endif;
     end;

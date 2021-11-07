@@ -1,6 +1,6 @@
--- Function with arithmetic expression
+-- Function with arithmetic expression returning real
 
-function test1 returns integer;
+function test_1_again returns real;
 begin
-    7 + 2 * (2  + 4);
+    7 + 2.5 * (2  + 4);
 end;

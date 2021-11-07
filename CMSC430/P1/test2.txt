@@ -1,6 +1,15 @@
--- Function with a lexical error
+-- Program containing arrow symbol, new reserved words, and real numbers with option e
 
-function test2 returns integer;
+function main b: integer returns real;
+    a: real is 3;
 begin
-    7 * 2 ^ (2  + 4);
+    if a < 2.5E3 then
+        7 7 + 2 * (2 + 4.77);
+    else
+        case b is
+            when 1 => a ** 2;
+            when 2 => a / 5;
+            others => a + 4;
+        endcase;
+    endif;
 end;

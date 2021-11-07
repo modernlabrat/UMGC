@@ -22,7 +22,7 @@ using namespace std;
 ws		[ \t\r]+
 comment		((\-\-.*\n)|(\/\/.*\n))
 line		[\n]
-id		([a-zA-Z][a-zA-Z0-9_]*)
+id		[a-zA-Z]([_]?[a-zA-Z0-9])*
 digit		[0-9]
 int		{digit}+
 punc		[\(\),:;]
