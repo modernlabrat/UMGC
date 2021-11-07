@@ -6,6 +6,8 @@
 
 #include <cstdio>
 #include <string>
+#include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -14,6 +16,10 @@ using namespace std;
 static int lineNumber;
 static string error = "";
 static int totalErrors = 0;
+static int lexicalErrors = 0;
+static int syntacticErrors = 0;
+static int semanticErrors = 0;
+static queue<string> errors;
 
 static void displayErrors();
 
@@ -35,6 +41,15 @@ int lastLine()
 	printf("\r");
 	displayErrors();
 	printf("     \n");
+
+	if (totalErrors == 0)
+		printf("Compiled Successfully");
+	else {
+		printf("Lexical Errors ", lexicalErrors);
+		printf("Syntax Errors ", syntacticErrors);
+		printf("Semantic Errors ", semanticErrors);
+	}
+
 	return totalErrors;
 }
     
@@ -45,12 +60,29 @@ void appendError(ErrorCategories errorCategory, string message)
 		"Semantic Error, Undeclared " };
 
 	error = messages[errorCategory] + message;
+	errors.push(error);
+
+	switch(errorCategory) {
+		case LEXICAL:
+			lexicalErrors++;
+			break;
+		case GENERAL_SEMANTIC:
+			semanticErrors++;
+			break;
+		case SYNTAX:
+			syntacticErrors++;
+		}
+
 	totalErrors++;
 }
 
 void displayErrors()
 {
-	if (error != "")
-		printf("%s\n", error.c_str());
-	error = "";
+	while (!errors.empty()) {
+		if (errors.front() != "")
+			printf("%s\n", errors.front());
+		errors.pop();
+	}
+
+	printf("\n");
 }

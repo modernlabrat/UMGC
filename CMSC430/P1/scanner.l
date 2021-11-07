@@ -20,29 +20,28 @@ using namespace std;
 %option noyywrap
 
 ws		[ \t\r]+
-comment		\-\-.*\n
+comment		((\-\-.*\n)|(\/\/.*\n))
 line		[\n]
 id		([a-zA-Z][a-zA-Z0-9_]*)
 digit		[0-9]
 int		{digit}+
 punc		[\(\),:;]
 %%
-bool (true|false)
-float ([0-9]+\.0*)(?:.e|E)(?:.\+|\-[0-9]+)
+real {digit}+\.{digit}*([Ee][+-]?{digit}+)?
 
 {ws}		{ ECHO; }
 {comment}	{ ECHO; nextLine();}
 {line}		{ ECHO; nextLine();}
-"<"		{ ECHO; return(RELOP); }
-"="		{ ECHO; return(RELOP); }
-"/="		{ ECHO; return(RELOP); }
-">"		{ ECHO; return(RELOP); }
-">="		{ ECHO; return(RELOP); }
-"<="		{ ECHO; return(RELOP); }
+{rel} { ECHO; }
 "+"		{ ECHO; return(ADDOP); }
 "-" { ECHO; return(ADDOP); }
 "/" { ECHO; return(MULOP); }
 "*"		{ ECHO; return(MULOP); }
+"=" { ECHO; return(RELOP); }
+"/=" { ECHO; return(RELOP); }
+">" { ECHO; return(RELOP); }
+">=" { ECHO; return(RELOP); }
+"<=" { ECHO; return(RELOP); }
 "=>" {ECHO; return(ARROW); }
 "**" {ECHO; return(EXPOP); }
 begin		{ ECHO; return(BEGIN_); }
@@ -55,7 +54,7 @@ is		{ ECHO; return(IS); }
 if  { ECHO; return(IF); }
 or { ECHO; return(OROP); }
 not { ECHO; return(NOTOP); }
-case { ECHO; return(CASE); }
+case { ECHO; return(CASE); } 
 else { ECHO; return(ELSE); }
 endcase { ECHO; return(ENDCASE); }
 endif { ECHO; return(ENDIF); }
@@ -67,11 +66,12 @@ rem { ECHO; return(REMOP); }
 reduce		{ ECHO; return(REDUCE); }
 returns		{ ECHO; return(RETURNS); }
 and		{ ECHO; return(ANDOP); }
-{id}		{ ECHO; return(IDENTIFIER);}
+{id}		{ ECHO; return(IDENTIFIER); }
 {int}		{ ECHO; return(INT_LITERAL); }
-{float} {ECHP; return(REAL_LITERAL); }
-{bool} { ECHO; return(BOOL_LITERAL); }
+{real} { ECHO; return(REAL_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
+"true" { ECHO; return(BOOL_LITERAL)}
+"false" { ECHO; return(BOOL_LITERAL)}
 .		{ ECHO; appendError(LEXICAL, yytext); }
 %%
 
