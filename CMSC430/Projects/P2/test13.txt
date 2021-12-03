@@ -1,0 +1,17 @@
+-- Comprehensive test with nested if
+
+function main a: integer, b: boolean, c: real returns integer;
+    d: integer is 8;
+    e: real is 3.75;
+    f: boolean is true and not b;
+begin
+    if a > 5 and a < 1 and c = 5. or c /= 8.E4 or f then
+        if c >= 7.E-2 and c <= 5.2 or false then
+            a + 2 - 7.E+2 / 9 * 4;
+        else
+            a rem 2 - 5 / c;
+        endif;
+     else
+         a ** 2 rem 3;
+     endif;
+end;

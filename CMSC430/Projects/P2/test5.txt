@@ -1,0 +1,7 @@
+-- Function with a Real Variable and Boolean and Real Literals
+
+function main returns boolean;
+    r: real is 5.7;
+begin
+    true and 2 < 8.E+1 + 1.7E-2 * 7.3E2;    
+end;

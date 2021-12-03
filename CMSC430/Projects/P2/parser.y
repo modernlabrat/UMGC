@@ -1,5 +1,7 @@
 /* Compiler Theory and Design
-   Dr. Duane J. Jarc */
+   Dr. Duane J. Jarc 
+   Modified By: Kyra Samuel
+   Date: 11/20/2021 */
 
 %{
 
@@ -17,29 +19,46 @@ void yyerror(const char* message);
 %define parse.error verbose
 
 %token IDENTIFIER
-%token INT_LITERAL
+%token INT_LITERAL REAL_LITERAL BOOL_LITERAL
 
-%token ADDOP MULOP RELOP ANDOP
+%token ADDOP MULOP RELOP ANDOP REMOP EXPOP OROP NOTOP
 
 %token BEGIN_ BOOLEAN END ENDREDUCE FUNCTION INTEGER IS REDUCE RETURNS
+%token IF THEN ELSE ENDIF ENDCASE CASE OTHERS ARROW WHEN REAL
 
 %%
 
 function:	
-	function_header optional_variable body ;
+	function_header_ variables body ;
 	
 function_header:	
-	FUNCTION IDENTIFIER RETURNS type ';' ;
+	FUNCTION IDENTIFIER parameters RETURNS type ';' ;
 
-optional_variable:
-	variable |
-	;
+function_header_:	
+	function_header |
+  error ';' ;
+
+variable_:
+  variable |
+  error ';' ;
 
 variable:
-	IDENTIFIER ':' type IS statement_ ;
+  IDENTIFIER ':' type IS statement_ ;
+
+variables:
+  variables variable_ |
+  ;
+
+parameter: 
+  IDENTIFIER ':' type |
+  IDENTIFIER ':' type ',' ;
+
+parameters:
+  parameters parameter | ;
 
 type:
 	INTEGER |
+  REAL |
 	BOOLEAN ;
 
 body:
@@ -48,26 +67,46 @@ body:
 statement_:
 	statement ';' |
 	error ';' ;
+
+statements:
+  statements statement_ |
+  statement_ ;
 	
 statement:
 	expression |
-	REDUCE operator reductions ENDREDUCE ;
+	REDUCE operator reductions ENDREDUCE |
+  IF expression THEN statements ELSE statements ENDIF |
+  CASE expression IS cases OTHERS ARROW statement_ ENDCASE 
+  ;
 
 operator:
-	ADDOP |
-	MULOP ;
+	ADDOP | 
+  MULOP ;
+
+cases:
+  cases case |
+  ;
+
+case: 
+  case WHEN INT_LITERAL ARROW statement_ |
+  ;
 
 reductions:
 	reductions statement_ |
 	;
-		    
+
 expression:
-	expression ANDOP relation |
-	relation ;
+	expression OROP logical |
+	logical ;
+
+logical:
+  logical ANDOP relation |
+  relation ;
 
 relation:
 	relation RELOP term |
-	term;
+	term
+  ;
 
 term:
 	term ADDOP factor |
@@ -75,13 +114,23 @@ term:
       
 factor:
 	factor MULOP primary |
-	primary ;
+  factor REMOP power |
+	power ;
+
+power:
+  unary EXPOP power |
+  unary ;
+
+unary:
+  NOTOP unary |
+  primary ;
 
 primary:
 	'(' expression ')' |
-	INT_LITERAL | 
-	IDENTIFIER ;
-    
+	INT_LITERAL | REAL_LITERAL | BOOL_LITERAL |
+	IDENTIFIER 
+  ;
+
 %%
 
 void yyerror(const char* message)

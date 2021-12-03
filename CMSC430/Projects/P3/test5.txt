@@ -1,0 +1,6 @@
+-- Function with arithmetic expression using real literals
+
+function main returns real;
+begin
+    8.3e+2 + 2.E-1 * (4.3E2 + 2.8) * 3.;
+end;
