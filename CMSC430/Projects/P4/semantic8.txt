@@ -1,0 +1,7 @@
+-- Using Boolean Expression with Exponentiation Operator
+
+function main returns integer;
+begin
+    5 ** (1 > 0);
+end;
+

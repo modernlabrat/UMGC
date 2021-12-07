@@ -1,0 +1,6 @@
+-- Using Arithmetic Expression with Logical Not Operator
+
+function main returns integer;
+begin
+    not 3;
+end;

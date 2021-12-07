@@ -1,0 +1,13 @@
+-- Test of Case Types Mismatch
+
+function main returns integer;
+    b: integer is 9 - 2 + 8;
+    c: real is 9.5;
+    d: boolean is 7 = 3;
+begin
+    case b is
+        when 1 => c;
+        when 2 => true;
+        others => false;
+    endcase;
+end;

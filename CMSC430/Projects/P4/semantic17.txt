@@ -1,0 +1,13 @@
+-- Test of Non Integer Case Expression
+
+function main returns integer;
+    b: integer is 9 - 2 + 8;
+    c: real is 9.5;
+    d: boolean is 7 = 5;
+begin
+    case c is
+        when 1 => d;
+        when 2 => true;
+        others => false;
+    endcase;
+end;

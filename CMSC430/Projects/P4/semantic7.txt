@@ -1,0 +1,7 @@
+-- Using Boolean Literal with Arithmetic Operator
+
+function main returns real;
+    a: real is 8.7 + false;
+begin
+    9.5 + true;
+end;

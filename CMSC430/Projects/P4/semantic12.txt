@@ -1,0 +1,11 @@
+-- If Condition Not Boolean
+
+function main returns integer;
+    b: integer is 7 * 2;
+begin
+    if 3 + 6 then
+        b + 3;
+    else
+        b * 4;
+    endif;
+end;

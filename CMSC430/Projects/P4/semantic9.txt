@@ -1,0 +1,6 @@
+-- Using Arithmetic Expression with Logical Or Operator
+
+function main returns integer;
+begin
+    9 or 6 < 3;
+end;

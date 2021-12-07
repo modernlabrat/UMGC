@@ -1,0 +1,6 @@
+-- Mixing Real literals with the Remainder Operator
+
+function main returns real;
+begin
+    4 rem 4.8;
+end;
