@@ -69,9 +69,6 @@ void appendError(ErrorCategories errorCategory, string message)
 		case SYNTAX:
 			syntacticErrors++;
 			break;
-    default:
-      semanticErrors++;
-      break;
 	}
 
 	totalErrors++;

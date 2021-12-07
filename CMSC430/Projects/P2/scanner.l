@@ -24,7 +24,6 @@ digit		[0-9]
 int		{digit}+
 punc		[\(\),:;]
 real 		{digit}+\.{digit}*([Ee][+-]?{digit}+)?
-operators     [=|/=|>|<=|>=]
 %%
 
 {ws}		{ ECHO; }
@@ -34,6 +33,12 @@ operators     [=|/=|>|<=|>=]
 "-" { ECHO; return(ADDOP); }
 "/" { ECHO; return(MULOP); }
 "*"		{ ECHO; return(MULOP); }
+"<"		{ ECHO; return(RELOP); }
+">"		{ ECHO; return(RELOP); }
+"<="		{ ECHO; return(RELOP); }
+">="		{ ECHO; return(RELOP); }
+"="		{ ECHO; return(RELOP); }
+"/="		{ ECHO; return(RELOP); }
 "=>" {ECHO; return(ARROW); }
 "**" {ECHO; return(EXPOP); }
 begin		{ ECHO; return(BEGIN_); }
@@ -63,7 +68,6 @@ and		{ ECHO; return(ANDOP); }
 {int}		{ ECHO; return(INT_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
 {real} { ECHO; return(REAL_LITERAL); }
-{operators} { ECHO; return(RELOP); }
 true { ECHO; return(BOOL_LITERAL); }
 false { ECHO; return(BOOL_LITERAL); }
 .		{ ECHO; appendError(LEXICAL, yytext); }
