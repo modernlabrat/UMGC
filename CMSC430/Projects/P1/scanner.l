@@ -39,8 +39,8 @@ operators     [=|/=|>|<=|>=]
 "*"		{ ECHO; return(MULOP); }
 "=>" {ECHO; return(ARROW); }
 "**" {ECHO; return(EXPOP); }
-"true" { ECHO; return(BOOL_LITERAL); }
-"false" { ECHO; return(BOOL_LITERAL); }
+true { ECHO; return(BOOL_LITERAL); }
+false { ECHO; return(BOOL_LITERAL); }
 begin		{ ECHO; return(BEGIN_); }
 boolean		{ ECHO; return(BOOLEAN); }
 end		{ ECHO; return(END); }
