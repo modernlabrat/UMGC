@@ -18,3 +18,9 @@ Types checkRelational(Types left, Types right);
 Types checkNegation(Types right);
 Types checkRemainder(Types right);
 Types checkCase(Types cases, Types statement);
+
+enum Operators {LESS, ADD, SUBTRACT, DIVIDE, MULTIPLY, EXP, REM, MORE, LESS_EQUAL, MORE_EQUAL, EQUALS, NOT_EQUALS};
+
+double evaluateReduction(Operators operator_, double head, double tail);
+double evaluateRelational(double left, Operators operator_, double right);
+double evaluateArithmetic(double left, Operators operator_, double right);

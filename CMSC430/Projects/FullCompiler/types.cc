@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -14,8 +15,8 @@ using namespace std;
 void checkAssignment(Types lValue, Types rValue, string message)
 {
   if (lValue == INT_TYPE && rValue == REAL_TYPE)
-    appendError(GENERAL_SEMANTIC, "Illegal Narrowing " + message);
-  else if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
+    appendError(GENERAL_SEMANTIC, "Illegal Narrowing Variable Initialization");
+	else if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
 		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
   
 }
@@ -89,3 +90,67 @@ void checkConditional(Types expression, Types then_statement, Types else_stateme
   if (then_statement != else_statement) 
     appendError(GENERAL_SEMANTIC, "If-Then Type Mismatch");
 }
+
+
+double evaluateReduction(Operators operator_, double head, double tail)
+{
+	if (operator_ == ADD)
+		return head + tail;
+	else
+    return head * tail;
+}
+
+double evaluateRelational(double left, Operators operator_, double right)
+{
+	double result;
+	switch (operator_)
+	{
+		case LESS:
+			result = left < right;
+			break;
+    case MORE:
+			result = left > right;
+			break;
+    case LESS_EQUAL:
+			result = left <= right;
+			break;
+    case MORE_EQUAL:
+			result = left >= right;
+			break;
+    case EQUALS:
+			result = left == right;
+			break;
+    case NOT_EQUALS:
+			result = left != right;
+			break;
+	}
+	return result;
+}
+
+double evaluateArithmetic(double left, Operators operator_, double right)
+{
+	double result;
+	switch (operator_)
+	{
+		case ADD:
+			result = left + right;
+			break;
+		case MULTIPLY:
+			result = left * right;
+			break;
+    case SUBTRACT:
+			result = left - right;
+			break;
+    case DIVIDE:
+			result = left / right;
+			break;
+    case EXP:
+			result = pow(left, right);
+			break;
+    case REM:
+			result = fmod(left, right);
+			break;
+	}
+	return result;
+}
+

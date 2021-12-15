@@ -1,0 +1,7 @@
+-- Function containing Boolean literals
+
+function main returns boolean;
+begin
+    true and false;
+end;
+

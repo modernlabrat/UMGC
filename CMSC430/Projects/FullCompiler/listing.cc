@@ -30,8 +30,8 @@ void firstLine()
 void nextLine()
 {
 	lineNumber++;
+  printf("%4d  ",lineNumber);
   displayErrors();
-	printf("%4d  ",lineNumber);
 }
 
 int lastLine()
@@ -83,3 +83,4 @@ void displayErrors()
 		printf("%s\n", error.c_str());
 	error = "";
 }
+

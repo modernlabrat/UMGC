@@ -5,6 +5,7 @@
 
 %{
 #include <string>
+
 using namespace std;
 
 #include "types.h"
@@ -28,18 +29,18 @@ punc		[\(\),:;]
 {ws}		{ ECHO; }
 {comment}	{ ECHO; nextLine();}
 {line}		{ ECHO; nextLine();}
-"<"		{ ECHO; return(RELOP); }
-">"		{ ECHO; return(RELOP); }
-"<="		{ ECHO; return(RELOP); }
-">="		{ ECHO; return(RELOP); }
-"="		{ ECHO; return(RELOP); }
-"/="		{ ECHO; return(RELOP); }
-"+"		{ ECHO; return(ADDOP); }
-"-"   { ECHO; return(ADDOP); }
-"*"		{ ECHO; return(MULOP); }
-"/"		{ ECHO;  return(MULOP); }
-"**" {ECHO; return(EXPOP); }
-"rem" {ECHO; return(REMOP); }
+"<"		{ ECHO; yylval.oper = LESS; return(RELOP); }
+">"		{ ECHO; yylval.oper = MORE; return(RELOP); }
+"<="		{ ECHO; yylval.oper = LESS_EQUAL; return(RELOP); }
+">="		{ ECHO; yylval.oper = MORE_EQUAL; return(RELOP); }
+"="		{ ECHO; yylval.oper = MORE_EQUAL; return(RELOP); }
+"/="		{ ECHO; yylval.oper = MORE_EQUAL; return(RELOP); }
+"+"		{ ECHO; yylval.oper = ADD; return(ADDOP); }
+"-"   { ECHO; yylval.oper = SUBTRACT; return(ADDOP); }
+"*"		{ ECHO; yylval.oper = MULTIPLY; return(MULOP); }
+"/"		{ ECHO; yylval.oper = DIVIDE; return(MULOP); }
+"**" {ECHO; yylval.oper = EXP; return(EXPOP); }
+"rem" {ECHO; yylval.oper = REM; return(REMOP); }
 "=>" {ECHO; return(ARROW); }
 begin		{ ECHO; return(BEGIN_); }
 boolean		{ ECHO; return(BOOLEAN); }
@@ -60,13 +61,14 @@ case { ECHO; return(CASE); }
 else { ECHO; return(ELSE); }
 endcase { ECHO; return(ENDCASE); }
 endif { ECHO; return(ENDIF); }
+true { ECHO; yylval.value = atoi(yytext); yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
+false { ECHO; yylval.value = atoi(yytext); yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
+{real} { ECHO; yylval.value = atof(yytext); yylval.type = REAL_TYPE; return(REAL_LITERAL); }
 or { ECHO; return(OROP); }
 not { ECHO; return(NOTOP); }
-true { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
-false { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
-{id}		{ ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); strcpy(yylval.iden, yytext); return(IDENTIFIER);}
-{int}		{ ECHO; yylval.type = INT_TYPE; return(INT_LITERAL); }
-{real} { ECHO; yylval.type = REAL_TYPE; return(REAL_LITERAL); }
+{id}		{ ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 
+			strcpy(yylval.iden, yytext); return(IDENTIFIER);}
+{int}		{ ECHO; yylval.value = atoi(yytext); yylval.type = INT_TYPE; return(INT_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
 .		{ ECHO; appendError(LEXICAL, yytext); }
 

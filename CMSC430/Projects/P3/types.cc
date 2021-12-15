@@ -14,8 +14,8 @@ using namespace std;
 void checkAssignment(Types lValue, Types rValue, string message)
 {
   if (lValue == INT_TYPE && rValue == REAL_TYPE)
-    appendError(GENERAL_SEMANTIC, "Illegal Narrowing " + message);
-  else if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
+    appendError(GENERAL_SEMANTIC, "Illegal Narrowing Variable Initialization");
+	else if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
 		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
   
 }
