@@ -1,7 +1,7 @@
 /*
  * Author: Kyra Samuel
  * Project: Homework 1
- * Class: SDEV425 
+ * Class: SDEV425_1.java
  * Instructor: Craig Poma
  * Created On: 04/14/2022
  */
