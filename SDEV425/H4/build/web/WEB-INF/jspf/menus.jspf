@@ -1,0 +1,16 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<header>
+    <h1>SDEV425 Final Project</h1>
+    <nav>
+        <!-- Menu items -->
+        <table class="menus">
+            <tr>
+                <td><a href="index.jsp">Home</a></td> 
+                <td> <a href="login.jsp">Sign In</a></td>
+                <td> <a href="ShowAccount">Your Account</a></td>
+                <td> <a href="logout.jsp">Sign Out</a></td>
+            </tr>
+        </table>
+    </nav>
+</header>
