@@ -46,8 +46,10 @@ int main(void)
       else { // get the rest of the input
         while ((ch = getchar()) != '\n' && ch != EOF);
 
-        if (ch == EOF) 
-          printf("EOF Reached");
+        if (ch == EOF) {
+          printf("EOF Reached\n");
+          exit(1);
+        }
       }
       
       if (strlen(input) == 1)
