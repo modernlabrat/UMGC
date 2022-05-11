@@ -128,13 +128,31 @@ public class App extends Application {
           @Override
           public void handle(ActionEvent e) {
             if (codeTextField.getText().equals(code)) {
-              multiAuthGrid.setVisible(false);
-              GridPane adminPane = displayAdminView(userTextField.getText(), primaryStage); // get AdminGrid
+              Noti systemUseNoti = new Noti();
 
-              Scene scene = new Scene(adminPane, 500, 400);
+              while(!systemUseNoti.isShowing()) {
+                if (systemUseNoti.getAudited()) {
+                  auditCount = auditCount +1;
+                  String audString = "system-use notification accepted: " + String.valueOf(systemUseNoti.getAccepted());
+    
+                  audits.add(new Audit(String.valueOf(auditCount), userTextField.getText(), audString, new Date().toString()));
+                  systemUseNoti.setAudited(true);
+                }
 
-              primaryStage.setScene(scene);
-              primaryStage.show();
+                multiAuthGrid.setVisible(false);
+
+                if (systemUseNoti.getAccepted()) {
+                  GridPane adminPane = displayAdminView(userTextField.getText(), primaryStage); // get AdminGrid
+  
+                  Scene scene = new Scene(adminPane, 500, 400);
+  
+                  primaryStage.setScene(scene);
+                  primaryStage.show();
+                }
+
+                primaryStage.hide();
+              }
+
             } else {
               multiAuthGrid.add(errorText, 1, 6);
               errorText.setText("Please try again");

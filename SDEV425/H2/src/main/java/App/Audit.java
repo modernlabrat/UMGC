@@ -17,12 +17,22 @@ public class Audit {
   private final SimpleStringProperty on;
   private final SimpleStringProperty id;
 
+  /*
+   * default constructor that creates a new audit
+   * @param id = id of audit
+   * @param user = current user's username 
+   * @param details = audit details
+   * @param on = date of audit
+   */
+  
   public Audit(String id, String user, String details, String on) {
     this.user = new SimpleStringProperty(user);
     this.details = new SimpleStringProperty(details);
     this.on = new SimpleStringProperty(on);
     this.id = new SimpleStringProperty(id);
   }
+
+  // getter and setter methods
 
   public String getUser() {
     return user.get();

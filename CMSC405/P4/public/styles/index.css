@@ -1,0 +1,120 @@
+#main-screen {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-image: url("../images/pacbg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: right;
+}
+
+.begin-btn {
+  width: 5rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 40px;
+  background:none;
+  color: white;
+  border: none;
+  margin-bottom: 5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.begin-btn:hover {
+  color: red;
+}
+
+.main-header {
+  position: absolute;
+  top: 25%;
+  margin: 0 auto;
+  font-size: 45px;
+  color: white;
+  font-weight: bold;
+}
+
+#score, 
+#bonus,
+#toggle-play {
+  color: white;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  font-size: 24px;
+}
+
+#bonus {
+  right: auto;
+  left: 5%;
+  top: 5%;
+  font-size: 35px;
+}
+
+#toggle-play {
+  top: auto;
+  right: 3%;
+  bottom: 4%;
+  cursor: pointer;
+}
+
+#toggle-play:hover {
+  color: red;
+}
+
+#done-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  height: 30rem;
+  margin: 0 auto;
+}
+
+#done-screen span {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+#done-screen span:first-of-type {
+  font-size: 28px;
+}
+
+#replayBtn {
+  width: 5rem;
+  height: 3rem;
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  margin-top: 10px;
+}
+
+
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Amatic SC', cursive;
+}

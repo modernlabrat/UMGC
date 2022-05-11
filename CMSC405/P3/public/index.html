@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC402P3-KS</title>
+    <link rel="stylesheet" href="styles/index.css">
+	</head>
+	<body>
+    <section id="menu">
+      <button type="button" id="moon-btn">Visit Moon</button>
+    </section>
+		<script src="js/three.js"></script>
+    <script>
+      // create scene, camera, renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      const renderer = new THREE.WebGLRenderer()
+  
+      let animationHandler, raindrop;
+
+      const clouds = [], 
+            stars = [],
+            hills = [],
+            raindropPoints = [];
+
+      renderer.setSize( window.innerWidth, window.innerHeight ) // set renderer size to window width and height
+
+      document.body.appendChild( renderer.domElement ) // add rendered to DOM
+
+      /*
+       * Main Universe Background
+       * Moon, Earth, Stars, Flying Saucer
+       */
+
+      // GEOMETRY
+      const moonGeom = new THREE.SphereGeometry(12, 25.7, 12.3),
+            earthGeom = new THREE.SphereGeometry(21, 25.7, 21.3),
+            starGeom = new THREE.SphereGeometry(1, 32, 16),
+            saucerGeom = new THREE.TorusGeometry(2, 0.5, 16, 100);
+
+      // TEXTURES
+      const moonTexture = new THREE.TextureLoader().load( 'images/moon_texture.jpg' ),
+            earthTexture = new THREE.TextureLoader().load( 'images/earth.jpg' ),
+            starTexture = new THREE.TextureLoader().load( 'images/star_texture.jpg'),
+            saucerTexture = new THREE.TextureLoader().load( 'images/spaceship.jpg' );
+
+      // MATERIALS
+      const moonMat = new THREE.MeshBasicMaterial({ map: moonTexture }),
+        earthMat = new THREE.MeshBasicMaterial({ map: earthTexture }),
+        starMat = new THREE.MeshBasicMaterial({ map: starTexture }),
+        saucerMap = new THREE.MeshBasicMaterial({ map: saucerTexture });
+
+      // create moon, earth, stars, flying saucer
+      // set positions for objs
+
+      // moon
+      const moon = new THREE.Mesh(moonGeom, moonMat) 
+      moon.position.y = -10; // moon position on Y
+
+      // earth
+      const earth = new THREE.Mesh(earthGeom, earthMat)
+      earth.position.y = -25; // earth position on y
+      earth.position.x = 260; // earth position on x
+
+      // stars
+      for (var i = 0; i < 150; i++) { // generate 150 stars
+        const star = new THREE.Mesh(starGeom, starMat)
+
+        // randomly position stars in scene
+        star.position.x = Math.floor(Math.random() * (499 + 199) - 199);
+        star.position.y = Math.floor(Math.random() * (599 + 199) - 199); 
+        star.position.z = Math.floor(Math.random() * (-20 + 599) - 599);
+
+        scene.add(star) // add star to scene
+        stars.push(star) // add star to stars array
+      } 
+
+      // flying saucer
+      const saucer = new THREE.Mesh(saucerGeom, saucerMap);
+      saucer.position.x = -100;
+      saucer.position.y = 12;
+
+      saucer.rotation.x = 21;
+
+      // position camera to see moon and saucer only
+      camera.position.z = 155; 
+
+      // add main objs to universe (scene)
+      scene.add(earth) 
+      scene.add(moon)
+      scene.add(saucer)
+
+      /*
+       * Start of landscape scene
+       * Background, Clouds, Terrain, Rain
+       */
+
+      // GEOMETRY
+      const cloudGeo = new THREE.PlaneBufferGeometry(60, 60),
+            rainGeom = new THREE.BufferGeometry(),
+            terrainGeom = new THREE.BoxGeometry(120, 20, 20, 20, 20);
+
+      // TEXTURES
+      const cloudTexture = new THREE.TextureLoader().load( 'images/cloud.png' ),
+            grassTexture = new THREE.TextureLoader().load( 'images/grass.jpg' );
+
+      // MATERIALS
+      const cloudMat = new THREE.MeshLambertMaterial({
+          map: cloudTexture,
+          transparent: true,
+        }),
+        grassMat = new THREE.MeshBasicMaterial({
+          map: grassTexture
+        }),
+        rainMat = new THREE.PointsMaterial({
+          color: 0xaaaaaa,
+          size: 0.1,
+          transparent: true
+        });
+      
+      /* create, clouds, terrain
+       * raindrops, lights
+       * and set positions for objs
+       */
+      
+      // clouds
+      for(var i = 0; i < 25; i++) { // create 9 clouds
+        let cloud = new THREE.Mesh(cloudGeo, cloudMat)
+
+        cloud.position.set(
+          Math.floor(Math.random() * (930 - 700) + 700),
+          Math.floor(Math.random() * (110 - 100) + 100),
+          Math.random() * -100 + 50
+        );
+
+        scene.add(cloud)
+        clouds.push(cloud)
+      }
+
+      // raindrops
+      for (var i = 0; i < 1500; i++) {
+        raindrop = new THREE.Vector3(
+          Math.floor(Math.random() * (930 - 700) + 700),
+          Math.floor(Math.random() * (110 + 10) - 10),
+          Math.random() * 200 - 150
+        )
+
+        raindrop.velocity = {}
+        raindrop.velocity = 0
+
+        raindropPoints.push(raindrop)
+        rainGeom.setFromPoints(raindropPoints)
+      }
+
+      // rain obj
+      const rain = new THREE.Points(rainGeom, rainMat)
+      scene.add(rain)
+
+      // terrain
+      const terrain = new THREE.Mesh(terrainGeom, grassMat);
+      terrain.position.x = 850
+      terrain.position.y = 15
+      terrain.position.z = 7
+
+      /*
+       * set up lights
+       * main light, lightning
+       */
+      const dirLight = new THREE.DirectionalLight(0xff0000);
+      dirLight.position.set(750, 41, 20);
+
+      const lightning = new THREE.PointLight(0xffffe0, 20, 400, 1.5)
+      lightning.position.set(750, 72, 100)
+
+      // add objects to scene
+      scene.add(terrain)
+      scene.add(dirLight)
+      scene.add(lightning)
+
+      /*
+       *  Methods
+       */
+
+      // universe background animation
+      function animateUniverse() { // start animated moon and earth
+        requestAnimationFrame(animateUniverse);
+
+        moon.rotation.y += 0.01; // rotate on Y
+        earth.rotation.y += 0.01;
+    
+        renderer.render( scene, camera ); // render scene and camera
+      }
+
+      animateUniverse(); // start moon/earth animations
+
+      // landscape scene animation
+
+      function animateLandscape() {
+        animationHandler = requestAnimationFrame(animateLandscape)
+
+        // start lightning
+        if (Math.random() > 0.90 || lightning.power > 90) {
+          if (lightning.power < 90)
+            lightning.position.set(
+              Math.floor(Math.random() * (880 - 750) + 750),
+              Math.floor(Math.random() * (1 - 80) + 80),
+              100
+            )
+          
+            lightning.power = 2 * Math.random() * 20;
+        }
+
+        raindropPoints.forEach(point => { // change y position of points
+          point.velocity -= 0.1 + Math.random() * 0.1;
+          point.y += point.velocity
+
+          if (point.y < -5) {
+            point.y = 110
+            point.velocity = 0;
+          }
+        })
+
+        rainGeom.setFromPoints(raindropPoints)
+      }
+
+      /*
+        * updates menu text and buttons
+        *
+        * @param btn - new replacement button to add to menu, null if type is "text"
+        * @param type - type of update => "text" or "new"
+        * @param text = innerHTML for button
+        */
+      function updateMenu(btn, type, text) {
+        let menu = document.getElementById("menu") // get main button
+        let currentBtn = menu.firstElementChild
+
+        switch(type) {
+          case "text": //updating btn text
+            currentBtn.innerHTML = text
+            currentBtn.disabled = true
+            break;
+          case "new": // remove current button - add new button
+            btn.innerHTML = text // set button text
+
+            menu.removeChild(currentBtn) 
+            menu.appendChild(btn)
+            break;
+        }
+      }
+
+      // moves camera and saucer to moon
+      function goToMoon() {
+        updateMenu(null, "text", "Visiting Moon")
+
+        // cam animation
+        function startCamAnimationM() { // move camera
+          const camAnimationM = requestAnimationFrame(startCamAnimationM)
+
+          let positionZ = camera.position.z,
+            positionY = camera.position.y;
+
+          positionZ -= 0.4;
+
+          camera.position.set(camera.position.x, camera.position.y, positionZ); // set PositionZ for camera
+          
+          if (positionZ > 90) { // check camera position
+            positionY += 0.05;
+            camera.position.set(camera.position.x, positionY, camera.position.z);
+          }
+          
+          if (positionZ < 66) // stop moving camera
+            cancelAnimationFrame(camAnimationM)
+        }
+
+        // saucer animation
+        function startSaucerAnimationM() { // move saucer
+          const saucerAnimationM = requestAnimationFrame(startSaucerAnimationM)
+
+          let positionX = saucer.position.x;
+          positionX += 0.25; // increase x position
+
+          // set saucer position x
+          saucer.position.set(positionX, saucer.position.y, saucer.position.z);
+          
+          if (positionX > -11) {   
+            // add go to earth button
+            let earthBtn = document.createElement("button");
+            earthBtn.type = "button"
+            earthBtn.addEventListener("click", goToEarth); // add event listener
+
+            updateMenu(earthBtn, "new", "Go to Earth")
+            
+            cancelAnimationFrame(saucerAnimationM)
+          }
+        } 
+
+        // start animations
+        startCamAnimationM()
+        startSaucerAnimationM()
+      }
+
+      document.getElementById("moon-btn").addEventListener("click", goToMoon); // add goToMoon click listener for menu btn
+
+      // saucer and camera goes to earth!
+      function goToEarth() {
+        updateMenu(null, "text", "Visiting Earth") // update menu text
+
+        // cam animation
+        function startCamAnimationE() {
+          const camAnimationE = requestAnimationFrame(startCamAnimationE)
+
+          let positionZ = camera.position.z,
+              positionX = camera.position.x,
+              positionY = camera.position.y;
+
+          if (positionX > 200) {
+            positionZ += 0.25; // increase on Z axis
+            positionY -= 0.25; // decrease on Y axis
+          }
+
+          positionX += 1; // increase on X axis
+
+          // set position for camera
+          camera.position.set(positionX, positionY, positionZ);
+
+          if (positionX > 250)  // stop moving camera
+            cancelAnimationFrame(camAnimationE)
+        }
+
+        // saucer animation
+        function startSaucerAnimationE() {
+          const saucerAnimationE = requestAnimationFrame(startSaucerAnimationE)
+
+          let positionX = saucer.position.x,
+              positionY = saucer.position.y;
+          
+          positionX += 1; // increase on X axis
+      
+          if (positionY > 6) // decrease on Y axis
+            positionY -= 0.1;
+
+          // set x and y positions for saucer
+          saucer.position.set(positionX, positionY, saucer.position.z);
+          
+          if (positionX > 245) { 
+            // create and add 'land on earth' button
+            let landBtn = document.createElement("button");
+            
+            landBtn.type = "button"
+            landBtn.addEventListener("click", landOnEarth); // click event listener
+
+            updateMenu(landBtn, "new", "Land On Earth")
+            cancelAnimationFrame(saucerAnimationE) // stop moving saucer
+          }
+        }
+
+        // start animations
+        startCamAnimationE()
+        startSaucerAnimationE()
+      }
+
+      // land saucer on Earth 
+      function landOnEarth() {
+        updateMenu(null, "text", "Landing") // update menu text
+
+        // saucer animation
+        function startSaucerAnimationL() {
+          const saucerAnimationL = requestAnimationFrame(startSaucerAnimationL)
+
+          let positionY = saucer.position.y,
+              positionX = saucer.position.x;
+
+          positionY -= 0.1; // decrease y position 
+          positionX += 0.01; // increase x position
+
+          saucer.position.set(positionX, positionY, saucer.position.z); // set PositionZ for saucer
+
+          if (positionY < -16) { // reposition the camera
+            camera.position.set(840, 45, 35)
+
+            updateMenu(null, "text", "Landed") // update menu text
+
+            // add fog to scene
+            scene.fog = new THREE.Fog(0x11111f, 0.002)
+
+            renderer.setClearColor(scene.fog.color)
+            animateLandscape()
+
+            renderer.render(scene, camera) // rerender scene with fog
+
+            cancelAnimationFrame(saucerAnimationL) // stop moving saucer
+          }
+        }
+
+        // start animation
+        startSaucerAnimationL()
+      }
+    </script>
+	</body>
+</html>

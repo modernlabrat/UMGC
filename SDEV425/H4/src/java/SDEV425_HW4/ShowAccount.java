@@ -24,6 +24,10 @@ import org.apache.derby.jdbc.ClientDataSource;
 /**
  *
  * @author jim
+ * 
+ * Commentated By - Kyra Samuel
+ *  
+ * Comments on suggested changes
  */
 public class ShowAccount extends HttpServlet {
 
@@ -62,6 +66,24 @@ public class ShowAccount extends HttpServlet {
             getData();
             
             // Set the Attribute for viewing in the JSP
+
+            /*
+             * Requirement 3: Protect stored cardholder data
+             * I would not display the PIN, ServiceCode, or CCV
+             * I also do not know why this application is storing this information,
+             * At the very least, the last four digits of the card number should only
+             * be visible. 
+             * 
+             * The Application should not store any of this information, if for some reason
+             * an application needed to send and receive payments. A third party application
+             * such as Stripe, Paypal, or Square is better off handling the transactions.
+             * These services offer better security because the customer_id should only be 
+             * stored in the SQL database, then with that customer_id, we should be able to 
+             * connect to our third-party app and manage billing.
+             * 
+             * Full Track Data, CVCs, and PINs should NEVER be stored after authorization.
+             * 
+             */
             request.setAttribute("Cardholdername", Cardholdername);
             request.setAttribute("CardType", CardType);
             request.setAttribute("ServiceCode", ServiceCode);
@@ -72,12 +94,25 @@ public class ShowAccount extends HttpServlet {
             request.setAttribute("PIN", PIN);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("account.jsp");
-            dispatcher.forward(request, response);       
-            
-  
+            dispatcher.forward(request, response); 
         }
 
     }
+
+    /*
+     * Requirement 4: Encrypt transmission of cardholder data across open, public networks
+     * 
+     * This requires strong cryptography and security protocols such as TLS, SSH, or IPSec. In other words,
+     * we should not deploy this application for production use as is. I recommended using a virtual private
+     * server to run server with a reverse proxy to a domain that has a TLS certificate at the very least. 
+     * Firebase hosting provides domains with a free certificate domain, per project!
+     * 
+     * The VPS should have a firewall setup as well. The server code should not run
+     * on the root's account. For example, DigitalOcean provides virtual private servers
+     * that run indefinitely (unless you do not pay) called Droplets, which can serve
+     * this application under an account with the appropriate permissions.
+     *
+     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -121,17 +156,10 @@ public class ShowAccount extends HttpServlet {
     public void getData() {
 
         try {
-            ClientDataSource ds = new ClientDataSource();
-            ds.setDatabaseName("SDEV425");
-            ds.setServerName("localhost");
-            ds.setPortNumber(1527);
-            ds.setUser("sdev425");
-            ds.setPassword("sdev425");
-            ds.setDataSourceName("jdbc:derby");
-
-            Connection conn = ds.getConnection();
-
+            Connection conn = DriverManager.getConnection(  
+            "jdbc:mysql://localhost:3306/sdev425","admin","adm1n");
             Statement stmt = conn.createStatement();
+
             String sql = "select user_id,Cardholdername, Cardtype,"
                     + "ServiceCode, CardNumber,CAV_CCV2,expiredate,FullTrackData,PIN"
                     + " from customeraccount  where user_id = " + session.getAttribute("UMUCUserID");
